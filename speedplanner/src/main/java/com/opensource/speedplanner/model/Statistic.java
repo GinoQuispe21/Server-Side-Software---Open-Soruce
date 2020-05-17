@@ -15,9 +15,11 @@ public class Statistic {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int code;
+    private long id;
 
     @NotNull
     @NotBlank
     private String Info;
+
+
 }
