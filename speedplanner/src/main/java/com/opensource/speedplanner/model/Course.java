@@ -91,4 +91,8 @@ public class Course {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
 	private InscriptionProcess inscriptionProcess;
+
+
+	@OneToOne(mappedBy = "courses")
+    private SectionRequest sectionRequest;
 }

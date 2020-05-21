@@ -42,4 +42,7 @@ public class EducationProvider { //Agregar anotaciones
 	@JoinColumn(name = "subscription_id", referencedColumnName = "id")
 	@JsonIgnore
     private Subscription subscription;
+
+	@OneToOne(mappedBy = "education_providers")
+	private Profile profile;
 }

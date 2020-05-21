@@ -42,4 +42,7 @@ public class LearningProgram {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
 	private EducationProvider educationProvider;
+
+    @OneToOne(mappedBy = "learning_programs")
+    private Profile profile;
 }
