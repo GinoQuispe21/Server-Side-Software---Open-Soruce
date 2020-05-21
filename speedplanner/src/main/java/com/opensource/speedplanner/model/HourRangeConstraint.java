@@ -1,5 +1,11 @@
 package com.opensource.speedplanner.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.util.Date;
 
@@ -13,9 +19,8 @@ public class HourRangeConstraint {
     private Long id;
 
 	@NotNull
-	@NotBlank	
+	@NotBlank
     private String type;
-	
 
     private Date startTime;
 
