@@ -1,7 +1,8 @@
 package com.opensource.speedplanner.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
-import sun.jvm.hotspot.gc.shared.Generation;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -28,7 +29,11 @@ public class Classroom {
     @NotBlank
     public  int capacity;
 
-    @NotNull
-    @NotBlank
-    private List<Course> courses;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "classrooms_courses",
+            joinColumns = {@JoinColumn(name = "classroom_id")},
+            inverseJoinColumns = {@JoinColumn(name = "course_id")})
+    @JsonIgnore
+    List<Course> courses;
 }

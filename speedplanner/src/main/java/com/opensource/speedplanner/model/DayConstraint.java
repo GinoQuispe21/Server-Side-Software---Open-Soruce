@@ -20,5 +20,9 @@ public class DayConstraint {
     @NotNull
     private String type;
 
+    @NotNull
     private boolean[] days;
+
+    @OneToOne(mappedBy = "day_constraint")
+    private ConstraintType constraintType;
 }

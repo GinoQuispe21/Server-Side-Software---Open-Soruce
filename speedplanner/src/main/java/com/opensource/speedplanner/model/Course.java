@@ -1,6 +1,7 @@
 package com.opensource.speedplanner.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -57,7 +58,17 @@ public class Course {
     @NotNull
     private int credits;
 
-    @NotBlank
-    @NotNull
-    private List<Course> requisites;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "courses")
+    @JsonIgnore
+    private List<Classroom> classrooms;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
+    @JsonIgnore
+    private Course requisite;
+
+    @OneToMany(mappedBy = "requisite")
+    private List<Course> courses;
 }

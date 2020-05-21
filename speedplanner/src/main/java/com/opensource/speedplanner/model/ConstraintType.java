@@ -20,4 +20,17 @@ public class ConstraintType {
     @NotBlank
     @NotNull
     private int type;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "constraint_type_id", referencedColumnName = "id")
+    private DayConstraint dayConstraint;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "constraint_type_id", referencedColumnName = "id")
+    private HourRangeConstraint hourRangeConstraint;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "constraint_type_id", referencedColumnName = "id")
+    private ProfessorConstraint professorConstraint;
 }
