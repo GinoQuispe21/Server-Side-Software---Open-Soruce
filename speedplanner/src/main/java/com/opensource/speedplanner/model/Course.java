@@ -79,6 +79,12 @@ public class Course {
     mappedBy = "courses")
     @JsonIgnore
 	private List<LearningProgram> learningPrograms;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "courses")
+    @JsonIgnore
+    private List<PossibleSchedule> possibleSchedules;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "inscription_process_id", nullable = false)
