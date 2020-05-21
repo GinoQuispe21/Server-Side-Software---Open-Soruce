@@ -21,7 +21,6 @@ public class ConstraintType {
     @NotNull
     private int type;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "constraint_type_id", referencedColumnName = "id")
     private DayConstraint dayConstraint;
@@ -33,4 +32,10 @@ public class ConstraintType {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "constraint_type_id", referencedColumnName = "id")
     private ProfessorConstraint professorConstraint;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "inscription_process_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+	private InscriptionProcess inscriptionProcess;
 }

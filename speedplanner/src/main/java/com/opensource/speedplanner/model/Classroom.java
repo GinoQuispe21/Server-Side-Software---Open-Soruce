@@ -36,4 +36,10 @@ public class Classroom {
             inverseJoinColumns = {@JoinColumn(name = "course_id")})
     @JsonIgnore
     List<Course> courses;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "education_provider_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+	private EducationProvider educationProvider;
 }

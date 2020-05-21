@@ -71,4 +71,16 @@ public class Course {
 
     @OneToMany(mappedBy = "requisite")
     private List<Course> courses;
+	
+	@ManyToMany(fetch = FetchType.LAZY,
+    cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+    mappedBy = "courses")
+    @JsonIgnore
+	private List<LearningProgram> learningPrograms;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "inscription_process_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+	private InscriptionProcess inscriptionProcess;
 }
