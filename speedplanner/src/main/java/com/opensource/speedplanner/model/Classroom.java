@@ -20,7 +20,12 @@ public class Classroom {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true)
-    public String Code;
+    public String id;
+
+    @NotBlank
+    @NotNull
+    @Size(max = 50)
+    public String classroomName;
 
     @NotBlank
     @NotNull
@@ -37,7 +42,7 @@ public class Classroom {
             joinColumns = {@JoinColumn(name = "classroom_id")},
             inverseJoinColumns = {@JoinColumn(name = "course_id")})
     @JsonIgnore
-    List<Course> courses;
+    List<Course> requisites;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "education_provider_id", nullable = false)

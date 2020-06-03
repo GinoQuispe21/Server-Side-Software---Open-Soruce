@@ -24,6 +24,13 @@ public class ConstraintType {
     @NotNull
     private int type;
 
+    //@NotBlank
+    //@NotNull
+    //private ConstraintType nextConstraint;
+
+    @NotBlank
+    public boolean ActiveFilter;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "constraint_type_id", referencedColumnName = "id")
     private DayConstraint dayConstraint;
