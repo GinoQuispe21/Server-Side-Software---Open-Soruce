@@ -20,7 +20,12 @@ public class Classroom {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true)
-    public String Code;
+    public String code;
+
+    @NotBlank
+    @NotNull
+    @Size(max = 50)
+    public String classroomName;
 
     @NotBlank
     @NotNull
