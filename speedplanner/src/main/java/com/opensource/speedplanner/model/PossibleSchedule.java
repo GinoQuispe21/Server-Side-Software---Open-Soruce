@@ -24,7 +24,7 @@ public class PossibleSchedule {
     @NotNull
     private int credits;
     @NotNull
-    private boolean finalSchedule;
+    private boolean isFinal;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})

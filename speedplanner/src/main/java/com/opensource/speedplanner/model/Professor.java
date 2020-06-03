@@ -21,7 +21,7 @@ public class Professor { //Agregar anotaciones
     private Long id;
 
     @Column(unique=true)
-    private Long code;
+    private int code;
 
     @Column(unique=true)
     @NotBlank
