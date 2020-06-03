@@ -28,6 +28,7 @@ public class Period { //Agregar anotaciones
     @NotNull
     private Date endDate;
 
+    //Porque LearningProgram tiene List<Period>
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "learning_program_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

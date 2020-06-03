@@ -73,26 +73,27 @@ public class Course {
 
     @OneToMany(mappedBy = "requisite")
     private List<Course> courses;
-	
-	@ManyToMany(fetch = FetchType.LAZY,
-    cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-    mappedBy = "courses")
-    @JsonIgnore
-	private List<LearningProgram> learningPrograms;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "courses")
     @JsonIgnore
     private List<PossibleSchedule> possibleSchedules;
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "inscription_process_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-	private InscriptionProcess inscriptionProcess;
-
 
 	@OneToOne(mappedBy = "courses")
     private SectionRequest sectionRequest;
+
+    //Porque LearningProgram tiene List<Course>
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "courses")
+    @JsonIgnore
+    private List<LearningProgram> learningPrograms;
+
+    //Porque InscriptionProcess tiene List<Course>
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "inscription_process_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private InscriptionProcess inscriptionProcess;
 }

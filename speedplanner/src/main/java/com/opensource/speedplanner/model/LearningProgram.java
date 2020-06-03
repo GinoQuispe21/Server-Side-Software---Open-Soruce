@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -16,10 +17,20 @@ import java.util.List;
 @Getter
 @Setter
 public class LearningProgram {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
+	@NotNull
+    @NotBlank
+    @Size(max = 40)
+	private String type; //CarreraUniv CarreraTecn
+
+    @NotNull
+    @NotBlank
+	private String name; //IngSoftware Mecanico
+
 	@NotNull
 	@NotBlank
     private Long numberOfCourses;
@@ -28,21 +39,23 @@ public class LearningProgram {
 	
 	@ManyToMany(fetch = FetchType.LAZY,
     cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-            @JoinTable(name = "curriculums_courses",
+            @JoinTable(name = "learning_programs_courses",
             joinColumns = {@JoinColumn(name = "learning_program_id")},
             inverseJoinColumns = {@JoinColumn(name = "course_id")})
             @JsonIgnore
     private List<Course> curriculum;
-	
+
+
 	@OneToOne(mappedBy = "learning_programs")
     private Statistic statistic;
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "education_provider_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-	private EducationProvider educationProvider;
 
     @OneToOne(mappedBy = "learning_programs")
     private Profile profile;
+
+    //Porque EducationProvider tiene List<LearningProgram>
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "education_provider_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private EducationProvider educationProvider;
 }
