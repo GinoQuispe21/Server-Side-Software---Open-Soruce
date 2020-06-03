@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "sectionrequests")
+@Table(name = "section_requests")
 @Getter
 @Setter
 public class SectionRequest {
@@ -34,6 +34,7 @@ public class SectionRequest {
     @Size(max = 30)
     private String studentName;
 
+    //Porque InscriptionProcess tiene List<InscriptionProcess>
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "inscription_process_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

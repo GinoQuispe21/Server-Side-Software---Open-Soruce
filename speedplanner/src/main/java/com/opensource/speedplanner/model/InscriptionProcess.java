@@ -19,7 +19,7 @@ public class InscriptionProcess {
 
     //private List<PossibleSchedule> possibleSchedules;
 
-    //private List<ConstraintType> constraints;
+    //private List<Constraint> constraints;
 
     //private List<SectionRequest> sectionRequests;
 	

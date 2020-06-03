@@ -9,20 +9,14 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "day_constraints")
+@PrimaryKeyJoinColumn(name = "day_constraint_id")
 @Getter
 @Setter
-public class DayConstraint {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
-
-    @NotBlank
-    @NotNull
-    private String type;
+public class DayConstraint extends Constraint{
 
     @NotNull
     private boolean[] days;
 
     @OneToOne(mappedBy = "day_constraint")
-    private ConstraintType constraintType;
+    private Constraint constraint;
 }

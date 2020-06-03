@@ -9,23 +9,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="professor_constraints)")
+@Table(name="professor_constraints")
+@PrimaryKeyJoinColumn(name = "professor_constraint_id")
 @Getter
 @Setter
-    public class ProfessorConstraint {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class ProfessorConstraint extends Constraint{
 
-    @NotBlank
-    @NotNull
-    private String type;
-
-    @NotBlank
-    @NotNull
     @Size(max=70)
     private String professorName;
 
     @OneToOne(mappedBy = "professor_constraints")
-    ConstraintType constraintType;
-    }
+    Constraint constraint;
+}

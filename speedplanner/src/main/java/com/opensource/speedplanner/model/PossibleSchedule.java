@@ -34,6 +34,7 @@ public class PossibleSchedule {
     @JsonIgnore
     private List<Course> courses;
 
+    //Porque InscriptionProcess tiene List<InscriptionProcess>
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "inscription_process_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

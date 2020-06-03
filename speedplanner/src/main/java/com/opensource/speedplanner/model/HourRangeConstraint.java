@@ -11,16 +11,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "hour_range_constraints")
+@PrimaryKeyJoinColumn(name = "hour_range_constraint_id")
 @Getter
 @Setter
-public class HourRangeConstraint {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-	@NotNull
-	@NotBlank
-    private String type;
+public class HourRangeConstraint extends Constraint{
 
     private Date startTime;
 
