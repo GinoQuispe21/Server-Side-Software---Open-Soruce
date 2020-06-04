@@ -20,7 +20,7 @@ public class Classroom {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true)
-    public String code;
+    public String id;
 
     @NotBlank
     @NotNull
@@ -42,9 +42,8 @@ public class Classroom {
             joinColumns = {@JoinColumn(name = "classroom_id")},
             inverseJoinColumns = {@JoinColumn(name = "course_id")})
     @JsonIgnore
-    List<Course> courses;
-
-    //Porque EducationProvider tiene List<Classroom>
+    List<Course> requisites;
+	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "education_provider_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

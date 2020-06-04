@@ -25,6 +25,13 @@ public class Constraint {
     @NotNull
     private int type;
 
+    //@NotBlank
+    //@NotNull
+    //private ConstraintType nextConstraint;
+
+    @NotBlank
+    public boolean ActiveFilter;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "next_constraint_id", referencedColumnName = "id")
     @JsonIgnore
