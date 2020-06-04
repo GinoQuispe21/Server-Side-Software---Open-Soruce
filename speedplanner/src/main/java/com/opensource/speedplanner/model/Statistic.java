@@ -26,6 +26,10 @@ public class Statistic {
     @NotBlank
     private Double menPercentageInPeriod;
 
+    @NotNull
+    @NotBlank
+    private int RegisteredStudentsInPeriod;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "learning_program_id", referencedColumnName = "id")
     @JsonIgnore

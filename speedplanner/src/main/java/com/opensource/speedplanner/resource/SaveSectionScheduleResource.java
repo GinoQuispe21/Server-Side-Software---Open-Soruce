@@ -1,20 +1,16 @@
-package com.opensource.speedplanner.model;
+package com.opensource.speedplanner.resource;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Entity
-@Table(name = "section_schedules")
 @Getter
 @Setter
-public class SectionSchedule {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public String code;
+
+public class SaveSectionScheduleResource {
 
     @NotNull
     @NotBlank
