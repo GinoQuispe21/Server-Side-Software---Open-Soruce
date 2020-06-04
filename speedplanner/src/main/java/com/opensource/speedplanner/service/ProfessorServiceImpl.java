@@ -27,7 +27,6 @@ public class ProfessorServiceImpl implements ProfessorService {
     public Professor updateProfessor(Long professorId, Professor professorDetails) {
         return professorRepository.findById(professorId).map(professor -> {
             professor.setCode(professorDetails.getCode());
-            professor.setIdNumber(professorDetails.getCode());
             professor.setNames(professorDetails.getNames());
             professor.setLastNames(professorDetails.getLastNames());
             professor.setSection(professorDetails.getSection());

@@ -1,5 +1,6 @@
 package com.opensource.speedplanner.service;
 import com.opensource.speedplanner.exception.ResourceNotFoundException;
+import com.opensource.speedplanner.model.LearningProgram;
 import com.opensource.speedplanner.model.Period;
 import com.opensource.speedplanner.repository.LearningProgramRepository;
 import com.opensource.speedplanner.repository.PeriodRepository;
@@ -8,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PeriodServiceImpl implements PeriodService {
@@ -51,5 +54,17 @@ public class PeriodServiceImpl implements PeriodService {
     @Override
     public Page<Period> getAllPeriods(Pageable pageable) {
         return periodRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Period> getAllPeriodsByLearningProgramId(Long learningProgramId, Pageable pageable) {
+        return periodRepository.findAllByLearningProgramId(learningProgramId, pageable);
+    }
+
+    @Override
+    public Period getByIdAndLearningProgramId(Long periodId, Long learningProgramId) {
+        return periodRepository.findByIdAndLearningProgramId(periodId, learningProgramId).
+                orElseThrow(() -> new ResourceNotFoundException("Period not found with Id: "+periodId+" " +
+                        "and Learning Program Id: "+learningProgramId));
     }
 }

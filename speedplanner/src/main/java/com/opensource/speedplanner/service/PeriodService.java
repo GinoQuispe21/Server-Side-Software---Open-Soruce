@@ -11,4 +11,6 @@ public interface PeriodService {
     Period updatePeriod(Long periodId, Period period);
     ResponseEntity<?> deletePeriod(Long periodId);
     Page<Period> getAllPeriods(Pageable pageable);
+    Page<Period> getAllPeriodsByLearningProgramId(Long learningProgramId, Pageable pageable);
+    Period getByIdAndLearningProgramId(Long periodId, Long learningProgramId);
 }
