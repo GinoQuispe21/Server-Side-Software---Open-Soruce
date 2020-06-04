@@ -20,9 +20,11 @@ public class SectionSchedule {
     @NotBlank
     public String sectionName;
 
+    @NotNull
     @NotBlank
     public Date startTime;
 
+    @NotNull
     @NotBlank
     public Date endTime;
 
@@ -30,6 +32,7 @@ public class SectionSchedule {
     @NotBlank
     public  int numberOfHours;
 
+    @NotNull
     @NotBlank
     public String day;
 }
