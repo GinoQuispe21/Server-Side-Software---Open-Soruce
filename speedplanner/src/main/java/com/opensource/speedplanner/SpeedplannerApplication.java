@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@EnableJpaAuditing
+//@EnableJpaAuditing
 @SpringBootApplication
 public class SpeedplannerApplication {
 
@@ -15,7 +15,5 @@ public class SpeedplannerApplication {
     }
 
     @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+    public ModelMapper modelMapper() {return new ModelMapper(); }
 }
