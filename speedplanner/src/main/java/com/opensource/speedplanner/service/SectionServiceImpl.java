@@ -50,7 +50,7 @@ public class SectionServiceImpl implements SectionService{
             section.setRegisteredStudents(sectionDetails.getRegisteredStudents());
             section.setVacancy(sectionDetails.getVacancy());
             return sectionRepository.save(section);
-        }).orElseThrow(() -> new ResourceNotFoundException("Section" , "Id" , "sectionId"));
+            }).orElseThrow(() -> new ResourceNotFoundException("Section" , "Id" , "sectionId"));
     }
 
     @Override
