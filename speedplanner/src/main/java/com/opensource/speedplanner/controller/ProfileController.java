@@ -7,6 +7,8 @@ import com.opensource.speedplanner.resource.RoleResource;
 import com.opensource.speedplanner.resource.SaveProfileResource;
 import com.opensource.speedplanner.resource.SaveRoleResource;
 import com.opensource.speedplanner.service.ProfileService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Tag(name = "profiles", description = "Profiles API")
 @RestController
 @RequestMapping("/api")
 public class ProfileController {
@@ -23,19 +26,25 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
+    @Operation(summary = "Create Profile", description = "Create a Profile by User Id and given resource",
+            tags = {"profiles"})
     @PostMapping("/users/{userId}/profiles")
     public ProfileResource createProfile(@PathVariable(name = "userId")Long userId ,
                                    @Valid @RequestBody SaveProfileResource resource){
         return convertToResource(profileService.createProfile(userId,convertToEntity(resource)));
     }
 
+    @Operation(summary = "Update Profile", description = "Update a Profile by specifying Id, " +
+            "User Id and given resource", tags = {"profiles"})
     @PutMapping("/users/{userId}/profiles/{profileId}")
     public  ProfileResource updateProfile(@PathVariable(name = "userId") Long userId ,
                                           @PathVariable(name = "profileId") Long profileId,
                                           @Valid @RequestBody SaveProfileResource resource){
         return convertToResource(profileService.updateProfile(userId,profileId, convertToEntity(resource)));
     }
-    
+
+    @Operation(summary = "Delete Profile", description = "Delete a Profile by specifying Id " +
+            "and User Id", tags = {"profiles"})
     @DeleteMapping("/users/{userId}/profiles/{profileId}")
     public ResponseEntity<?> deleteProfile(@PathVariable(name = "userId")Long userId ,
                                            @PathVariable(name = "profileId")Long profileId){

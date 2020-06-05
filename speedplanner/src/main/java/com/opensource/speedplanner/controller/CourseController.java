@@ -6,6 +6,7 @@ import com.opensource.speedplanner.resource.SaveCourseResource;
 import com.opensource.speedplanner.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name = "courses", description = "Courses API")
 @RestController
 @RequestMapping("/api")
 public class CourseController {
@@ -27,7 +29,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @Operation(summary = "Get Course", description = "Get All Courses by Pages", tags = { "courses" })
+    @Operation(summary = "Get Courses", description = "Get All Courses by Pages", tags = { "courses" })
     @GetMapping("/courses")
     public Page<CourseResource> getAllCourse(
             @Parameter(description="Pageable Parameter")
@@ -46,6 +48,7 @@ public class CourseController {
         return convertToResource(courseService.getCourseById(courseId));
     }
 
+    @Operation(summary = "Get Courses by ClassroomId", description = "Get all Courses by pages and specifying Classroom Id", tags = { "courses" })
     @GetMapping("/classrooms/{classroomId}/courses")
     public Page<CourseResource> getAllCourseByClassroomId(@PathVariable(name = "classroomId") Long classroomId, Pageable pageable) {
         Page<Course> coursesPage = courseService.getAllCourseByClassroomId(classroomId, pageable);
@@ -53,18 +56,21 @@ public class CourseController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @Operation(summary = "Create Course", description = "Create a Course by given resource", tags = {"courses"})
     @PostMapping("/courses")
     public CourseResource createCourse(@Valid @RequestBody SaveCourseResource resource)  {
         Course course = convertToEntity(resource);
         return convertToResource(courseService.createCourse(course));
     }
 
+    @Operation(summary = "Update Course", description = "Update a Course by specifying Id and given resource", tags = {"classrooms"})
     @PutMapping("/courses/{id}")
-    public CourseResource updatePost(@PathVariable(name = "id") Long courseId, @Valid @RequestBody SaveCourseResource resource) {
+    public CourseResource updateCourse(@PathVariable(name = "id") Long courseId, @Valid @RequestBody SaveCourseResource resource) {
         Course course = convertToEntity(resource);
         return convertToResource(courseService.updateCourse(courseId, course));
     }
 
+    @Operation(summary = "Delete Course", description = "Delete a Course by specifying Id", tags = {"courses"})
     @DeleteMapping("/courses/{id}")
     public ResponseEntity<?> deleteCourse(@PathVariable(name = "id") Long courseId) {
         return courseService.deleteCourse(courseId);
@@ -73,8 +79,10 @@ public class CourseController {
 
 
     private CourseResource convertToResource(Course entity) {
-        return mapper.map(entity, CourseResource.class); }
+        return mapper.map(entity, CourseResource.class);
+    }
 
     private Course convertToEntity(SaveCourseResource resource) {
-        return mapper.map(resource, Course.class); }
+        return mapper.map(resource, Course.class);
+    }
 }
