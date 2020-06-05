@@ -1,15 +1,15 @@
 package com.opensource.speedplanner.service;
 
 import com.opensource.speedplanner.exception.ResourceNotFoundException;
-import com.opensource.speedplanner.model.ConstraintType;
 import com.opensource.speedplanner.model.DayConstraint;
-import com.opensource.speedplanner.repository.ConstraintTypeRepository;
 import com.opensource.speedplanner.repository.DayConstraintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DayConstraintServiceImpl implements DayConstraintService{
     @Autowired
     private DayConstraintRepository dayConstraintRepository;

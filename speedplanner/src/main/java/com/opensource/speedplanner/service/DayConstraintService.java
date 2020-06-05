@@ -1,6 +1,6 @@
 package com.opensource.speedplanner.service;
 
-import com.opensource.speedplanner.model.ConstraintType;
+
 import com.opensource.speedplanner.model.DayConstraint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
