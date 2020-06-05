@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 public interface PeriodService {
     Period getPeriodById(Long periodId);
     Period createPeriod(Period period);
-    Period updatePeriod(Long periodId, Period period);
-    ResponseEntity<?> deletePeriod(Long periodId);
+    Period updatePeriod(Long periodId, Long learningProgramId, Period period);
+    ResponseEntity<?> deletePeriod(Long periodId, Long learningProgramId);
     Page<Period> getAllPeriods(Pageable pageable);
     Page<Period> getAllPeriodsByLearningProgramId(Long learningProgramId, Pageable pageable);
     Period getByIdAndLearningProgramId(Long periodId, Long learningProgramId);

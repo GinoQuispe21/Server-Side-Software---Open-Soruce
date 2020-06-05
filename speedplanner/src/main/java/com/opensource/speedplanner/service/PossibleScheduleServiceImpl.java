@@ -28,7 +28,7 @@ public class PossibleScheduleServiceImpl implements PossibleScheduleService {
         return possibleScheduleRepository.findById(possibleScheduleId).map(possibleSchedule ->{
             possibleSchedule.setCourses(possibleScheduleDetails.getCourses());
             possibleSchedule.setCredits(possibleScheduleDetails.getCredits());
-            possibleSchedule.setFinalSchedule(possibleScheduleDetails.isFinalSchedule());
+            possibleSchedule.setFinal(possibleScheduleDetails.isFinal());
             possibleSchedule.setInscriptionProcess(possibleScheduleDetails.getInscriptionProcess());
             return possibleScheduleRepository.save(possibleSchedule);
         }).

@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +32,10 @@ public class PeriodController {
         return mapper.map(entity, PeriodResource.class);
     }
 
+    //@PostMapping("/learningPrograms/{learningProgramId}/periods") //Terminar, falta agregar SaveResources
+    //public PeriodResource createPeriod(@PathVariable(name = "learningProgramId") Long learningProgramId,
+                                      // @Valid @RequestBody ){}
+
     @GetMapping("/learningPrograms/{learningProgramId}/periods")
     public Page<PeriodResource> getAllPeriodsByLearningProgramId(@PathVariable(name="learningProgramId")
             Long learningProgramId, Pageable pageable){
@@ -46,5 +49,18 @@ public class PeriodController {
     public PeriodResource getPeriodByIdAndLearningProgramId(@PathVariable(name="learningProgramId")
                             Long learningProgramId, @PathVariable(name = "periodId") Long periodId){
         return convertToResource(periodService.getByIdAndLearningProgramId(periodId, learningProgramId));
+    }
+
+    @PutMapping("/learningPrograms/{learningProgramId}/periods/{periodId}")
+    public PeriodResource updateResource(@PathVariable(name="learningProgramId") Long learningProgramId,
+                                         @PathVariable(name = "periodId") Long periodId,
+                                         @Valid @RequestBody PeriodResource periodResource){
+        return convertToResource(periodService.updatePeriod(periodId, learningProgramId, convertToEntity(periodResource)));
+    }
+
+    @DeleteMapping("/learningPrograms/{learningProgramId}/periods/{periodId}")
+    public ResponseEntity<?> deletePeriod(@PathVariable(name = "periodId") Long periodId,
+                                          @PathVariable(name= "learningProgramId") Long learningProgramId){
+        return periodService.deletePeriod(periodId, learningProgramId);
     }
 }

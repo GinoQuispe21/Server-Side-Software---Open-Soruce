@@ -32,20 +32,23 @@ public class PeriodServiceImpl implements PeriodService {
     }
 
     @Override
-    public Period updatePeriod(Long periodId, Period periodDetails) {
+    public Period updatePeriod(Long periodId, Long learningProgramId, Period requestPeriod) {
+        if(!periodRepository.existsById(learningProgramId))
+            throw new ResourceNotFoundException("Learning Program", "Id", learningProgramId);
+
         return periodRepository.findById(periodId).map(period -> {
-            period.setCode(periodDetails.getCode());
-            period.setStartDate(periodDetails.getStartDate());
-            period.setStartDate(periodDetails.getEndDate());
-            period.setInscriptionProcess(periodDetails.getInscriptionProcess());
-            period.setLearningProgram(periodDetails.getLearningProgram());
+            period.setCode(requestPeriod.getCode());
+            period.setStartDate(requestPeriod.getStartDate());
+            period.setStartDate(requestPeriod.getEndDate());
+            period.setInscriptionProcess(requestPeriod.getInscriptionProcess());
+            period.setLearningProgram(requestPeriod.getLearningProgram());
             return periodRepository.save(period);
         }).orElseThrow(() -> new ResourceNotFoundException("Period", "Id", periodId));
     }
 
     @Override
-    public ResponseEntity<?> deletePeriod(Long periodId) {
-        return periodRepository.findById(periodId).map(period -> {
+    public ResponseEntity<?> deletePeriod(Long periodId, Long learningProgramId) {
+        return periodRepository.findByIdAndLearningProgramId(periodId, learningProgramId).map(period -> {
             periodRepository.delete(period);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("Period", "Id", periodId));
