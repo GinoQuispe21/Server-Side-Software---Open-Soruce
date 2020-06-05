@@ -3,6 +3,7 @@ package com.opensource.speedplanner.controller;
 import com.opensource.speedplanner.model.PossibleSchedule;
 import com.opensource.speedplanner.model.Professor;
 import com.opensource.speedplanner.resource.ProfessorResource;
+import com.opensource.speedplanner.resource.SaveProfessorResource;
 import com.opensource.speedplanner.service.ProfessorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,13 @@ public class ProfessorController {
         return mapper.map(entity, ProfessorResource.class);
     }
 
-    private ProfessorResource convertToEntity(SaveProfessorResource resource){
+    private Professor convertToEntity(SaveProfessorResource resource){
         return mapper.map(resource, Professor.class);
     }
 
     @PostMapping("/professors/")
     public ProfessorResource createProfessor(@Valid @RequestBody SaveProfessorResource resource){
-        return professorService.createProfessor(convertToEntity(resource));
+        return convertToResource(professorService.createProfessor(convertToEntity(resource)));
     }
 
     @GetMapping("/professors/{professorId}")

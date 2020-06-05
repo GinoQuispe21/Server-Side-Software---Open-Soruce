@@ -2,6 +2,7 @@ package com.opensource.speedplanner.controller;
 
 import com.opensource.speedplanner.model.Period;
 import com.opensource.speedplanner.resource.PeriodResource;
+import com.opensource.speedplanner.resource.SavePeriodResource;
 import com.opensource.speedplanner.service.PeriodService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class PeriodController {
     @PutMapping("/learningPrograms/{learningProgramId}/periods/{periodId}")
     public PeriodResource updateResource(@PathVariable(name="learningProgramId") Long learningProgramId,
                                          @PathVariable(name = "periodId") Long periodId,
-                                         @Valid @RequestBody PeriodResource periodResource){
+                                         @Valid @RequestBody SavePeriodResource periodResource){
         return convertToResource(periodService.updatePeriod(periodId, learningProgramId, convertToEntity(periodResource)));
     }
 

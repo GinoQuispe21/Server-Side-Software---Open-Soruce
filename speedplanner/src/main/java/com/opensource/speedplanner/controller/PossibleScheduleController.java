@@ -2,6 +2,7 @@ package com.opensource.speedplanner.controller;
 
 import com.opensource.speedplanner.model.PossibleSchedule;
 import com.opensource.speedplanner.resource.PossibleScheduleResource;
+import com.opensource.speedplanner.resource.SavePossibleScheduleResource;
 import com.opensource.speedplanner.service.PossibleScheduleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
