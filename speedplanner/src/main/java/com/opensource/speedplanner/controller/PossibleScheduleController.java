@@ -48,7 +48,7 @@ public class PossibleScheduleController {
         return convertToResource(possibleScheduleService.getByIdAndInscriptionProcessId(possibleScheduleId, inscriptionProcessId));
     }
 
-    @PutMapping("/inscriptionProcesses/{inscriptionProcessId}/possibleSchedules/")
+    @PostMapping("/inscriptionProcesses/{inscriptionProcessId}/possibleSchedules/")
     public PossibleScheduleResource createPossibleSchedule(@PathVariable(name = "inscriptionProcessId") Long inscriptionProcessId,
                                                            @Valid @RequestBody SavePossibleScheduleResource resource){
         return convertToResource(possibleScheduleService.createPossibleSchedule(convertToEntity(resource)));
