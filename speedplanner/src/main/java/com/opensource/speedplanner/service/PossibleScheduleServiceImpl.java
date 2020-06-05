@@ -17,13 +17,7 @@ public class PossibleScheduleServiceImpl implements PossibleScheduleService {
 
     @Autowired
     private LearningProgramRepository learningProgramRepository;
-
-    @Override
-    public PossibleSchedule getPossibleScheduleById(Long possibleScheduleId) {
-        return possibleScheduleRepository.findById(possibleScheduleId).
-                orElseThrow(() -> new ResourceNotFoundException("Possible Schedule", "Id", possibleScheduleId));
-    }
-
+    
     @Override
     public Page<PossibleSchedule> getAllPossibleSchedulesByInscriptionProcessId(Long inscriptionProcessId, Pageable pageable) {
         return possibleScheduleRepository.findAllByInscriptionProcessId(inscriptionProcessId, pageable);
