@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProfessorServiceImpl implements ProfessorService {
     @Autowired
     ProfessorRepository professorRepository;
@@ -27,7 +29,6 @@ public class ProfessorServiceImpl implements ProfessorService {
     public Professor updateProfessor(Long professorId, Professor professorDetails) {
         return professorRepository.findById(professorId).map(professor -> {
             professor.setCode(professorDetails.getCode());
-            professor.setIdNumber(professorDetails.getCode());
             professor.setNames(professorDetails.getNames());
             professor.setLastNames(professorDetails.getLastNames());
             professor.setSection(professorDetails.getSection());

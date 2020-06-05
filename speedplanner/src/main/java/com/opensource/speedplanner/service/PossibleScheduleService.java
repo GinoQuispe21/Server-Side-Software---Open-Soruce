@@ -6,9 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface PossibleScheduleService {
-    PossibleSchedule getPossibleScheduleById(Long possibleScheduleId);
+    Page<PossibleSchedule> getAllPossibleSchedulesByInscriptionProcessId(Long inscriptionProcessId, Pageable pageable);
     PossibleSchedule createPossibleSchedule(PossibleSchedule possibleSchedule);
     PossibleSchedule updatePossibleSchedule(Long possibleScheduleId, PossibleSchedule possibleSchedule);
-    ResponseEntity<?> deletePossibleSchedule(Long possibleSchedule);
+    ResponseEntity<?> deletePossibleSchedule(Long possibleScheduleId, Long inscriptionProcessId);
     Page<PossibleSchedule> getAllPossibleSchedules(Pageable pageable);
+    PossibleSchedule getByIdAndInscriptionProcessId(Long possibleScheduleId, Long inscriptionProcessId);
 }

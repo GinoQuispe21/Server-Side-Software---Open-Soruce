@@ -1,5 +1,6 @@
 package com.opensource.speedplanner.service;
 import com.opensource.speedplanner.exception.ResourceNotFoundException;
+import com.opensource.speedplanner.model.LearningProgram;
 import com.opensource.speedplanner.model.Period;
 import com.opensource.speedplanner.repository.LearningProgramRepository;
 import com.opensource.speedplanner.repository.PeriodRepository;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PeriodServiceImpl implements PeriodService {
     @Autowired
@@ -17,32 +20,39 @@ public class PeriodServiceImpl implements PeriodService {
     @Autowired
     private LearningProgramRepository learningProgramRepository;
 
-    @Override
+   /* @Override
     public Period getPeriodById(Long periodId) {
         return periodRepository.findById(periodId).
                 orElseThrow(() -> new ResourceNotFoundException("Period", "Id", periodId));
+    }*/
+
+    @Override
+    public Period createPeriod(Long learningProgramId, Period period) {
+        return learningProgramRepository.findById(learningProgramId).map(learningProgram -> {
+            period.setLearningProgram(learningProgram);
+            return periodRepository.save(period);
+        }).
+            orElseThrow(() -> new ResourceNotFoundException("Learning Program", "Id", learningProgramId));
     }
 
     @Override
-    public Period createPeriod(Period period) {
-        return periodRepository.save(period);
-    }
+    public Period updatePeriod(Long periodId, Long learningProgramId, Period requestPeriod) {
+        if(!periodRepository.existsById(learningProgramId))
+            throw new ResourceNotFoundException("Learning Program", "Id", learningProgramId);
 
-    @Override
-    public Period updatePeriod(Long periodId, Period periodDetails) {
         return periodRepository.findById(periodId).map(period -> {
-            period.setCode(periodDetails.getCode());
-            period.setStartDate(periodDetails.getStartDate());
-            period.setStartDate(periodDetails.getEndDate());
-            period.setInscriptionProcess(periodDetails.getInscriptionProcess());
-            period.setLearningProgram(periodDetails.getLearningProgram());
+            period.setCode(requestPeriod.getCode());
+            period.setStartDate(requestPeriod.getStartDate());
+            period.setStartDate(requestPeriod.getEndDate());
+            period.setInscriptionProcess(requestPeriod.getInscriptionProcess());
+            period.setLearningProgram(requestPeriod.getLearningProgram());
             return periodRepository.save(period);
         }).orElseThrow(() -> new ResourceNotFoundException("Period", "Id", periodId));
     }
 
     @Override
-    public ResponseEntity<?> deletePeriod(Long periodId) {
-        return periodRepository.findById(periodId).map(period -> {
+    public ResponseEntity<?> deletePeriod(Long periodId, Long learningProgramId) {
+        return periodRepository.findByIdAndLearningProgramId(periodId, learningProgramId).map(period -> {
             periodRepository.delete(period);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("Period", "Id", periodId));
@@ -51,5 +61,17 @@ public class PeriodServiceImpl implements PeriodService {
     @Override
     public Page<Period> getAllPeriods(Pageable pageable) {
         return periodRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Period> getAllPeriodsByLearningProgramId(Long learningProgramId, Pageable pageable) {
+        return periodRepository.findAllByLearningProgramId(learningProgramId, pageable);
+    }
+
+    @Override
+    public Period getByIdAndLearningProgramId(Long periodId, Long learningProgramId) {
+        return periodRepository.findByIdAndLearningProgramId(periodId, learningProgramId).
+                orElseThrow(() -> new ResourceNotFoundException("Period not found with Id: "+periodId+" " +
+                        "and Learning Program Id: "+learningProgramId));
     }
 }
