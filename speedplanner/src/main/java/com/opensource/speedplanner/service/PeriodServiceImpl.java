@@ -20,15 +20,19 @@ public class PeriodServiceImpl implements PeriodService {
     @Autowired
     private LearningProgramRepository learningProgramRepository;
 
-    @Override
+   /* @Override
     public Period getPeriodById(Long periodId) {
         return periodRepository.findById(periodId).
                 orElseThrow(() -> new ResourceNotFoundException("Period", "Id", periodId));
-    }
+    }*/
 
     @Override
-    public Period createPeriod(Period period) {
-        return periodRepository.save(period);
+    public Period createPeriod(Long learningProgramId, Period period) {
+        return learningProgramRepository.findById(learningProgramId).map(learningProgram -> {
+            period.setLearningProgram(learningProgram);
+            return periodRepository.save(period);
+        }).
+            orElseThrow(() -> new ResourceNotFoundException("Learning Program", "Id", learningProgramId));
     }
 
     @Override

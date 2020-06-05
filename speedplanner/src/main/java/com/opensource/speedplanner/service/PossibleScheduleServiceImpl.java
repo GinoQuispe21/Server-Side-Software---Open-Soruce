@@ -47,8 +47,9 @@ public class PossibleScheduleServiceImpl implements PossibleScheduleService {
     }
 
     @Override
-    public ResponseEntity<?> deletePossibleSchedule(Long possibleScheduleId) {
-        return possibleScheduleRepository.findById(possibleScheduleId).map(possibleSchedule -> {
+    public ResponseEntity<?> deletePossibleSchedule(Long possibleScheduleId, Long inscriptionProcessId) {
+        return possibleScheduleRepository.findByIdAndInscriptionProcessId(possibleScheduleId, inscriptionProcessId).
+                map(possibleSchedule -> {
             possibleScheduleRepository.delete(possibleSchedule);
             return ResponseEntity.ok().build();
         }).

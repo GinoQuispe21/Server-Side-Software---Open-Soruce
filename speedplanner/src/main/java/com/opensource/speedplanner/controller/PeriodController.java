@@ -24,7 +24,7 @@ public class PeriodController {
     @Autowired
     private PeriodService periodService;
 
-    private Period convertToEntity(PeriodResource periodResource){
+    private Period convertToEntity(SavePeriodResource periodResource){
         return mapper.map(periodResource, Period.class);
     }
 
@@ -32,9 +32,11 @@ public class PeriodController {
         return mapper.map(entity, PeriodResource.class);
     }
 
-    //@PostMapping("/learningPrograms/{learningProgramId}/periods") //Terminar, falta agregar SaveResources
-    //public PeriodResource createPeriod(@PathVariable(name = "learningProgramId") Long learningProgramId,
-                                      // @Valid @RequestBody ){}
+    @PostMapping("/learningPrograms/{learningProgramId}/periods")
+    public PeriodResource createPeriod(@PathVariable(name = "learningProgramId") Long learningProgramId,
+                                       @Valid @RequestBody SavePeriodResource resource){
+        return convertToResource(periodService.createPeriod(learningProgramId, convertToEntity(resource)));
+    }
 
     @GetMapping("/learningPrograms/{learningProgramId}/periods")
     public Page<PeriodResource> getAllPeriodsByLearningProgramId(@PathVariable(name="learningProgramId")
