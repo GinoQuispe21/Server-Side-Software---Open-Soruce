@@ -7,8 +7,8 @@ import com.opensource.speedplanner.repository.SectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.data.domain.Pageable;
 
+import java.awt.print.Pageable;
 import java.awt.print.Pageable;
 
 public class SectionServiceImpl implements SectionService{
@@ -19,13 +19,6 @@ public class SectionServiceImpl implements SectionService{
     @Autowired
     private CourseRepository courseRepository;
 
-
-
-    /*
-    @Override
-    public Page<SectionRequest> getAllSectionRequests(Pageable pageable) {
-        return sectionRequestRepository.findAll(pageable);
-    }*/
     @Override
     public Page<Section> getAllSections(Pageable pageable) {
         return sectionRepository.findAll(pageable);
@@ -33,7 +26,7 @@ public class SectionServiceImpl implements SectionService{
 
     @Override
     public Page<Section> getAllSectionsByCourseId(Long courseId, Pageable pageable) {
-        return sectionRepository.findByCourseId(courseId , pageable);
+        return sectionRepository.findAll( pageable);
     }
 
     @Override
@@ -48,6 +41,7 @@ public class SectionServiceImpl implements SectionService{
             return sectionRepository.save(section);
         }).orElseThrow(() -> new ResourceNotFoundException("CourseId" , "Id " , "courseId"));
     }
+
     @Override
     public Section updateSection(Long courseId, Long sectionId, Section sectionDetails) {
         if(courseRepository.existsById(courseId))
@@ -69,4 +63,5 @@ public class SectionServiceImpl implements SectionService{
                 "Section not found Id" + sectionId + "and CourseId "  + courseId
         ));
     }
+
 }
