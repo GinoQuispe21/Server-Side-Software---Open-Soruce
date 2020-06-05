@@ -12,5 +12,5 @@ public interface ClassroomService {
     Classroom getClassroomById(Long classroomId);
     Classroom createClassroom(Classroom classroom);
     Classroom updateClassroom(Long classroomId, Classroom classroomDetails);
-    ResponseEntity<?> deleteComment(Long classroomId);
+    ResponseEntity<?> deleteClassroom(Long classroomId);
 }

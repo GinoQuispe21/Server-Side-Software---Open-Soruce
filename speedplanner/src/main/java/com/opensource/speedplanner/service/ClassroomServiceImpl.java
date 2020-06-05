@@ -10,9 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ClassroomServiceImpl implements ClassroomService {
     @Autowired
     private ClassroomRepository classroomRepository;
@@ -55,7 +57,7 @@ public class ClassroomServiceImpl implements ClassroomService {
     }
 
     @Override
-    public ResponseEntity<?> deleteComment(Long classroomId) {
+    public ResponseEntity<?> deleteClassroom(Long classroomId) {
         return classroomRepository.findById(classroomId).map(classroom -> {
             classroomRepository.delete(classroom);
             return ResponseEntity.ok().build();
