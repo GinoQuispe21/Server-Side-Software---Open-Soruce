@@ -3,8 +3,7 @@ package com.opensource.speedplanner.service;
 import com.opensource.speedplanner.model.Section;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
 
 /*
     Page<Comment> getAllCommentsByPostId(Long postId, Pageable pageable);
