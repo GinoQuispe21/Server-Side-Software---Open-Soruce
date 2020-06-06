@@ -12,11 +12,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-   /*@Autowired
-    private PostRepository postRepository;
-
-    @Autowired
-    private CommentRepository commentRepository;*/
 
     @Autowired
     private RoleRepository roleRepository;

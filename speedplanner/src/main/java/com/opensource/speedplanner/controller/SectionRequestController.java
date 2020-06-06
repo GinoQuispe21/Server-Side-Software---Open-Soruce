@@ -21,8 +21,8 @@ public class SectionRequestController {
     @Autowired
     private ModelMapper mapper;
 
-
-    private SectionRequestService sectionRequestService = new SectionRequestServiceImpl();
+    @Autowired
+    private SectionRequestService sectionRequestService;
 
 
     @Operation(summary = "Create Section request", description = "Create a Section request by Inscription process Id and " +

@@ -24,8 +24,8 @@ public class ProfileController {
     @Autowired
     private ModelMapper mapper;
 
-
-    private ProfileService profileService = new ProfileServiceImpl();
+    @Autowired
+    private ProfileService profileService;
 
     @Operation(summary = "Create Profile", description = "Create a Profile by User Id and given resource",
             tags = {"profiles"})

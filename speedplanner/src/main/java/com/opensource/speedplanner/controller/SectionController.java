@@ -21,8 +21,8 @@ public class SectionController {
     @Autowired
     private ModelMapper mapper;
 
-
-    private SectionService sectionService = new SectionServiceImpl();
+    @Autowired
+    private SectionService sectionService;
 
     @Operation(summary = "Create Section", description = "Create a Section by Course Id and given resource",
             tags = {"sections"})
