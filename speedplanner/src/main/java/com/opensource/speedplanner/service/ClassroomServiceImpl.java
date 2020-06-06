@@ -51,7 +51,7 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public Classroom updateClassroom(Long classroomId, Classroom classroomDetails) {
         return classroomRepository.findById(classroomId).map(classroom -> {
-            classroom.setClassroomName (classroomDetails.getClassroomName());
+            classroom.setClassroomName(classroomDetails.getClassroomName());
             return classroomRepository.save(classroom);
         }).orElseThrow(() -> new ResourceNotFoundException("Classroom", "Id", classroomId));
     }

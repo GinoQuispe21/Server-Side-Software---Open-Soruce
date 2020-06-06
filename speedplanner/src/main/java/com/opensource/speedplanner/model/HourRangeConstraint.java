@@ -15,10 +15,16 @@ import java.util.Date;
 @Getter
 @Setter
 public class HourRangeConstraint extends Constraint{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
+    @NotNull
     private Date startTime;
-
+    @NotNull
     private Date endTime;
-	
+
+    @NotBlank
+    @NotNull
     private int numberOfHours;
 }

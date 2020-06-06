@@ -39,4 +39,6 @@ public class InscriptionProcessServiceImpl implements InscriptionProcessService{
         inscriptionProcessRepository.delete(inscriptionProcess);
         return ResponseEntity.ok().build();
     }
+
+    //Agregar update
 }

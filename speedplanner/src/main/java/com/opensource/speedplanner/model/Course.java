@@ -33,9 +33,9 @@ public class Course {
     @Size(max = 25)
     private String name;
 
-    @NotBlank
-    @NotNull
-    private List<Section> sections;
+    //@NotBlank
+    //@NotNull
+    //private List<Section> sections;
 
     @NotBlank
     @NotNull

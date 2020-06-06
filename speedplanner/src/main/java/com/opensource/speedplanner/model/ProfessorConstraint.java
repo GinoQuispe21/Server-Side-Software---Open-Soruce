@@ -15,6 +15,10 @@ import javax.validation.constraints.Size;
 @Setter
 public class ProfessorConstraint extends Constraint{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
     @Size(max=70)
     private String professorName;
 

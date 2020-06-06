@@ -1,7 +1,7 @@
 package com.opensource.speedplanner.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity

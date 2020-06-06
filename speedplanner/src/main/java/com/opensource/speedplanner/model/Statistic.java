@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 @Table(name ="statistics")
 @Getter
 @Setter
-
 public class Statistic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

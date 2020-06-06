@@ -14,8 +14,12 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class DayConstraint extends Constraint{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
     @NotNull
-    private boolean[] days;
+    private static boolean[] days = new boolean[7];
 
     @OneToOne(mappedBy = "day_constraint")
     private Constraint constraint;
