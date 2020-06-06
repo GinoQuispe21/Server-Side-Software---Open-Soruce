@@ -31,7 +31,7 @@ public class ProfessorServiceImpl implements ProfessorService {
             professor.setCode(professorDetails.getCode());
             professor.setNames(professorDetails.getNames());
             professor.setLastNames(professorDetails.getLastNames());
-            professor.setSection(professorDetails.getSection());
+            
             return professorRepository.save(professor);
         }).orElseThrow(() -> new ResourceNotFoundException("Professor", "Id", professorId));
 

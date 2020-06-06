@@ -12,7 +12,6 @@ import java.util.Date;
 @Table(name ="subscriptions")
 @Getter
 @Setter
-
 public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

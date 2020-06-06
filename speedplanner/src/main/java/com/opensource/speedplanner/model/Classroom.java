@@ -20,21 +20,21 @@ public class Classroom {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true)
-    public String id;
+    private Long id;
 
     @NotBlank
     @NotNull
     @Size(max = 50)
-    public String classroomName;
+    private String classroomName;
 
     @NotBlank
     @NotNull
     @Size(max = 50)
-    public String type;
+    private String type;
 
     @NotNull
     @NotBlank
-    public  int capacity;
+    private int capacity;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})

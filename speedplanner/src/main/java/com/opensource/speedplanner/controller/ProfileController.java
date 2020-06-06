@@ -7,6 +7,7 @@ import com.opensource.speedplanner.resource.RoleResource;
 import com.opensource.speedplanner.resource.SaveProfileResource;
 import com.opensource.speedplanner.resource.SaveRoleResource;
 import com.opensource.speedplanner.service.ProfileService;
+import com.opensource.speedplanner.service.ProfileServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
@@ -23,8 +24,8 @@ public class ProfileController {
     @Autowired
     private ModelMapper mapper;
 
-    @Autowired
-    private ProfileService profileService;
+
+    private ProfileService profileService = new ProfileServiceImpl();
 
     @Operation(summary = "Create Profile", description = "Create a Profile by User Id and given resource",
             tags = {"profiles"})

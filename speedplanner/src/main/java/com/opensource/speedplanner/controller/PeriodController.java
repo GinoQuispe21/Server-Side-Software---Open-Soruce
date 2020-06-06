@@ -4,6 +4,8 @@ import com.opensource.speedplanner.model.Period;
 import com.opensource.speedplanner.resource.PeriodResource;
 import com.opensource.speedplanner.resource.SavePeriodResource;
 import com.opensource.speedplanner.service.PeriodService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name="periods", description = "Periods API")
 @RestController
 @RequestMapping(value = "/api")
 public class PeriodController {
@@ -33,12 +36,16 @@ public class PeriodController {
         return mapper.map(entity, PeriodResource.class);
     }
 
+    @Operation(summary = "Create Period", description = "Creates a new period for a Learning Program, given" +
+            "its Id.", tags = { "periods" })
     @PostMapping("/learningPrograms/{learningProgramId}/periods")
     public PeriodResource createPeriod(@PathVariable(name = "learningProgramId") Long learningProgramId,
                                        @Valid @RequestBody SavePeriodResource resource){
         return convertToResource(periodService.createPeriod(learningProgramId, convertToEntity(resource)));
     }
 
+    @Operation(summary = "Get All Periods by Learning Program Id", description = "Gets all the periods from" +
+            "a Learning Program, specifying its Id.", tags = { "periods" })
     @GetMapping("/learningPrograms/{learningProgramId}/periods")
     public Page<PeriodResource> getAllPeriodsByLearningProgramId(@PathVariable(name="learningProgramId")
             Long learningProgramId, Pageable pageable){
@@ -48,19 +55,25 @@ public class PeriodController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @Operation(summary = "Get Period by Id and Learning Program Id", description = "Gets and individual" +
+            "period, given its Id and its corresponding Learning Program Id.", tags = { "periods" })
     @GetMapping("/learningPrograms/{learningProgramId}/periods/{periodId}")
     public PeriodResource getPeriodByIdAndLearningProgramId(@PathVariable(name="learningProgramId")
                             Long learningProgramId, @PathVariable(name = "periodId") Long periodId){
         return convertToResource(periodService.getByIdAndLearningProgramId(periodId, learningProgramId));
     }
 
+    @Operation(summary = "Update Period", description = "Updates a period's attributes, given its" +
+            "Id and the corresponding Learning Program Id.", tags = { "periods" })
     @PutMapping("/learningPrograms/{learningProgramId}/periods/{periodId}")
-    public PeriodResource updateResource(@PathVariable(name="learningProgramId") Long learningProgramId,
+    public PeriodResource updatePeriod(@PathVariable(name="learningProgramId") Long learningProgramId,
                                          @PathVariable(name = "periodId") Long periodId,
                                          @Valid @RequestBody SavePeriodResource periodResource){
         return convertToResource(periodService.updatePeriod(periodId, learningProgramId, convertToEntity(periodResource)));
     }
 
+    @Operation(summary = "Delete Period", description = "Deletes a period, given its Id and the corresponding" +
+            "Learning program Id.", tags = { "periods" })
     @DeleteMapping("/learningPrograms/{learningProgramId}/periods/{periodId}")
     public ResponseEntity<?> deletePeriod(@PathVariable(name = "periodId") Long periodId,
                                           @PathVariable(name= "learningProgramId") Long learningProgramId){

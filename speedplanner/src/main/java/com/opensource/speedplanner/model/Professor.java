@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @Table(name="professors")
 @Getter
 @Setter
-public class Professor { //Agregar anotaciones
+public class Professor {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
