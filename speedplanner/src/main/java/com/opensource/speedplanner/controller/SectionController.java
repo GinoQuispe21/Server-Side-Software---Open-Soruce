@@ -4,6 +4,7 @@ import com.opensource.speedplanner.model.Section;
 import com.opensource.speedplanner.resource.SaveSectionResource;
 import com.opensource.speedplanner.resource.SectionResource;
 import com.opensource.speedplanner.service.SectionService;
+import com.opensource.speedplanner.service.SectionServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
@@ -20,8 +21,8 @@ public class SectionController {
     @Autowired
     private ModelMapper mapper;
 
-   @Autowired
-    private SectionService sectionService;
+
+    private SectionService sectionService = new SectionServiceImpl();
 
     @Operation(summary = "Create Section", description = "Create a Section by Course Id and given resource",
             tags = {"sections"})

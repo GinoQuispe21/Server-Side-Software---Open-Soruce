@@ -4,6 +4,7 @@ import com.opensource.speedplanner.model.SectionRequest;
 import com.opensource.speedplanner.resource.SaveSectionRequestResource;
 import com.opensource.speedplanner.resource.SectionRequestResource;
 import com.opensource.speedplanner.service.SectionRequestService;
+import com.opensource.speedplanner.service.SectionRequestServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
@@ -20,8 +21,8 @@ public class SectionRequestController {
     @Autowired
     private ModelMapper mapper;
 
-    @Autowired
-    private SectionRequestService sectionRequestService;
+
+    private SectionRequestService sectionRequestService = new SectionRequestServiceImpl();
 
 
     @Operation(summary = "Create Section request", description = "Create a Section request by Inscription process Id and " +

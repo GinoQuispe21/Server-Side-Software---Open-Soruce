@@ -18,10 +18,10 @@ public class SpeedplannerApplication {
     @Bean
     public ModelMapper modelMapper() {return new ModelMapper(); }
 
-    @Bean(name="entityManagerFactory")
+    /*@Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 
         return sessionFactory;
-    }
+    }*/
 }
