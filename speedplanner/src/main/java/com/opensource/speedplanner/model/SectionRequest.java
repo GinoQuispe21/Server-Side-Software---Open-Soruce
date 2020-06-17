@@ -24,6 +24,7 @@ public class SectionRequest {
 
     @NotNull
     @Lob
+    @Column(name = "messages" )
     private String message;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -33,6 +34,7 @@ public class SectionRequest {
 
     @NotBlank
     @Size(max = 30)
+    @Column(name = "student_names")
     private String studentName;
 
     //Porque InscriptionProcess tiene List<InscriptionProcess>

@@ -23,23 +23,28 @@ public class Section { //agregar anotaciones
     @NotBlank
     @NotNull
     @Size(max = 4)
+    @Column(name = "section_names")
     private String sectionName;
 
     @NotBlank
     @NotNull
     @Size(max = 20)
+    @Column(name = "venues")
     private String venue;
 
     @NotBlank
     @NotNull
+    @Column(name = "vacancies")
     private int vacancy;
 
     @NotBlank
     @NotNull
+    @Column(name = "registeredStudentses")
     private int registeredStudents;
 
     @NotBlank
     @NotNull
+    @Column(name = "numberOfHourses" )
     private int numberOfHours;
 
     //SectionSchedules list

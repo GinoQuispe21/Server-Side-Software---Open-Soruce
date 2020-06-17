@@ -22,15 +22,18 @@ public class Profile {
     @NotBlank
     @NotNull
     @Size(max = 20)
+    @Column(name = "names")
     private String name;
 
     @NotBlank
     @NotNull
     @Size(max = 20)
+    @Column(name = "last_names")
     private String lastNames;
 
     @NotBlank
     @NotNull
+    @Column(name = "genders")
     private boolean gender;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -45,10 +48,12 @@ public class Profile {
 
     @NotBlank
     @NotNull
+    @Column(name = "semesters")
     private int semester;
 
     @NotBlank
     @NotNull
+    @Column(name = "id_names" , unique = true)
     private Long idNumber;
 
     @OneToOne(mappedBy = "profiles")

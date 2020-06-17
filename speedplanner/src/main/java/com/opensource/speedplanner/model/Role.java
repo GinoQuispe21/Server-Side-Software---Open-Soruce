@@ -18,6 +18,7 @@ public class Role {
 
     @NotBlank
     @NotNull
+    @Column(name = "types")
     private int type;
 
     @OneToOne(mappedBy = "roles")
